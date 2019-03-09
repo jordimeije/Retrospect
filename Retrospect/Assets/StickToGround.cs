@@ -20,7 +20,6 @@ public class StickToGround : MonoBehaviour {
         LayerMask mask = LayerMask.GetMask("Ground");
         Didraycasthit = Physics.Raycast(ray, out raycastHit, 100f, mask);
 
-        print(raycastHit.point);
         if (Didraycasthit)
             transform.position = raycastHit.point;
     }

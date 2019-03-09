@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 114993085630775664}
   m_Layer: 9
   m_Name: '[CameraRig]'
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

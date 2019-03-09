@@ -11,6 +11,10 @@ TagManager:
   - Handle
   - Toggle Bg
   - Controller
+  - Fire
+  - PhysicsPassthroughDuplicate
+  - SKSEditorTemp
+  - PhysDupe
   layers:
   - Default
   - TransparentFX
@@ -23,9 +27,9 @@ TagManager:
   - PostProcessing
   - Body
   - Ground
-  - 
-  - 
-  - 
+  - CustomRenderer
+  - CustomRendererOnly
+  - CustomRendererPlaceholder
   - 
   - 
   - 
