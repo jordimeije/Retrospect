@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - projectile
+  - FxTemporaire
+  - OnText
+  - Off Text
+  - Handle
+  - Toggle Bg
+  - Controller
   layers:
   - Default
   - TransparentFX
@@ -14,8 +21,8 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
+  - Body
+  - Ground
   - 
   - 
   - 

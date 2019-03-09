@@ -21,6 +21,8 @@ namespace Valve.VR.InteractionSystem
 		private Vector3 startMousePosition;
 		private float realTime;
 
+        public Transform Body;
+
 		//-------------------------------------------------
 		void OnEnable()
 		{
@@ -31,6 +33,8 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		void Update()
 		{
+
+
 			float forward = 0.0f;
 			if ( Input.GetKey( KeyCode.W ) || Input.GetKey( KeyCode.UpArrow ) )
 			{
@@ -61,11 +65,14 @@ namespace Valve.VR.InteractionSystem
 			float deltaRealTime = realTimeNow - realTime;
 			realTime = realTimeNow;
 
-			Vector3 delta = new Vector3( right, 0.0f, forward ) * currentSpeed * deltaRealTime;
+            Vector3 delta = new Vector3(right, 0.0f, forward) * currentSpeed * deltaRealTime;
 
-			transform.position += transform.TransformDirection( delta );
+            Body.transform.position += transform.TransformDirection(delta);
 
-			Vector3 mousePosition = Input.mousePosition;
+            //Body.transform.position += new Vector3(transform.forward.x + Body.transform.localEulerAngles.x, 0, transform.forward.z + Body.transform.localEulerAngles.z) * currentSpeed * deltaRealTime * forward;
+            //Body.transform.position += new Vector3(transform.forward.z, 0, -transform.forward.x) * currentSpeed * deltaRealTime * right;
+
+            Vector3 mousePosition = Input.mousePosition;
 
 			if ( Input.GetMouseButtonDown( 1 ) /* right mouse */)
 			{

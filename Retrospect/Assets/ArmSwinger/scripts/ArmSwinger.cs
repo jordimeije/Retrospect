@@ -221,10 +221,9 @@ public class ArmSwinger : MonoBehaviour {
 	private Vector3 rightControllerLocalPosition;
 	private Vector3 leftControllerPreviousLocalPosition;
 	private Vector3 rightControllerPreviousLocalPosition;
-    private Transform rightControllerPreviousTransform;
 
-    // Headset/Camera Rig saved position history
-    private LinkedList<Vector3> previousHeadsetRewindPositions = new LinkedList<Vector3>();
+	// Headset/Camera Rig saved position history
+	private LinkedList<Vector3> previousHeadsetRewindPositions = new LinkedList<Vector3>();
 	private Vector3 lastHeadsetRewindPositionSaved = new Vector3(0, 0, 0);
 	private LinkedList<Vector3> previousCameraRigRewindPositions = new LinkedList<Vector3>();
 	private Vector3 lastCameraRigRewindPositionSaved = new Vector3(0, 0, 0);
@@ -305,23 +304,17 @@ public class ArmSwinger : MonoBehaviour {
 
 	// Camera Rig scaling
 	private float cameraRigScaleModifier = 1.0f;
+	
+	/****** INITIALIZATION ******/
+	void Awake() {
+        if (!UnityEngine.XR.XRDevice.isPresent)
+        {
+            enabled = false;
+            return;
+        }
 
-    private Vector3 _Move;
-    private Vector3 Move;
-
-    public bool Accelerate;
-
-    public float AccelerateSpeed;
-
-    public bool HeadMovement;
-
-    public static bool RightObject;
-    public static bool LeftObject;
-
-    /****** INITIALIZATION ******/
-    void Awake() {
-		// Find an assign components and objects
-		controllerManager = this.GetComponent<SteamVR_ControllerManager>();
+        // Find an assign components and objects
+        controllerManager = this.GetComponent<SteamVR_ControllerManager>();
 		leftControllerGameObject = controllerManager.left;
 		rightControllerGameObject = controllerManager.right;
 		leftControllerTrackedObj = leftControllerGameObject.GetComponent<SteamVR_TrackedObject>();
@@ -350,11 +343,8 @@ public class ArmSwinger : MonoBehaviour {
 		// Seed the initial previousLocalPositions
 		leftControllerPreviousLocalPosition = leftControllerGameObject.transform.localPosition;
 		rightControllerPreviousLocalPosition = rightControllerGameObject.transform.localPosition;
-        //rightControllerPreviousTransform = new GameObject().transform;
-        //rightControllerPreviousTransform.position = rightControllerGameObject.transform.position;
-        //rightControllerPreviousTransform.eulerAngles = rightControllerGameObject.transform.eulerAngles;
 
-        seedSavedPositions();
+		seedSavedPositions();
 
 		// Seed the initial saved position
 		saveRewindPosition(true);
@@ -394,9 +384,9 @@ public class ArmSwinger : MonoBehaviour {
 		wallClipThisFrame = false;
 
 		// Check for wall clipping
-		/*if (preventWallClip && headsetCollider.inGeometry) {
+		if (preventWallClip && headsetCollider.inGeometry) {
 			triggerRewind(PreventionReason.HEADSET);
-		}*/
+		}
 
 		// Save the current controller positions for our use
 		leftControllerLocalPosition = leftControllerGameObject.transform.localPosition;
@@ -409,30 +399,8 @@ public class ArmSwinger : MonoBehaviour {
 			!rewindThisFrame &&
 			!armSwingingPaused &&
 			!rewindInProgress) {
-            Move = variableArmSwingMotion();
-            if (Accelerate)
-            {
-                if (Move.x - _Move.x > AccelerateSpeed/2000)
-                    Move.x = _Move.x + AccelerateSpeed/2000;
-                else if (Move.x - _Move.x < -AccelerateSpeed/2000)
-                    Move.x = _Move.x - AccelerateSpeed/2000;
-
-                if (Move.y - _Move.y > AccelerateSpeed/2000)
-                    Move.y = _Move.y + AccelerateSpeed/2000;
-                else if (Move.y - _Move.y < -AccelerateSpeed/2000)
-                    Move.y = _Move.y - AccelerateSpeed/2000;
-
-                if (Move.z - _Move.z > AccelerateSpeed/2000)
-                    Move.z = _Move.z + AccelerateSpeed/2000;
-                else if (Move.z - _Move.z < -AccelerateSpeed/2000)
-                    Move.z = _Move.z - AccelerateSpeed/2000;
-                _Move = Move;
-            }
-           if (HeadMovement)
-                transform.position += new Vector3(headsetGameObject.transform.forward.x, 0, headsetGameObject.transform.forward.z) * Move.x;
-            else
-            transform.position += Move;
-        }
+			transform.position += variableArmSwingMotion();
+		}
 
 		// Save the current controller positions for next frame
 		leftControllerPreviousLocalPosition = leftControllerGameObject.transform.localPosition;
@@ -489,6 +457,7 @@ public class ArmSwinger : MonoBehaviour {
 		}
     }
 
+    public GameObject Head;
     /***** CORE FUNCTIONS *****/
     // Variable Arm Swing locomotion
     Vector3 variableArmSwingMotion() {
@@ -522,16 +491,16 @@ public class ArmSwinger : MonoBehaviour {
 				break;
 		}
 
-        if (movedThisFrame) {
-
-            // If raycastOnlyHeightAdjustWhileArmSwinging is enabled, check to see if the Y distance between the previous arm swinging position and
-            // the current ArmSwinging position are higher than the instant height change max.  This ensures that players who have 
-            // raycastOnlyHeightAdjustWhileArmSwinging enabled are not instantly teleported to the terrain when they start arm swinging.
-            if (!armSwinging && raycastOnlyHeightAdjustWhileArmSwinging) {
+		if (movedThisFrame) {
+			// If raycastOnlyHeightAdjustWhileArmSwinging is enabled, check to see if the Y distance between the previous arm swinging position and
+			// the current ArmSwinging position are higher than the instant height change max.  This ensures that players who have 
+			// raycastOnlyHeightAdjustWhileArmSwinging enabled are not instantly teleported to the terrain when they start arm swinging.
+			if (!armSwinging && raycastOnlyHeightAdjustWhileArmSwinging) {
 				armSwinging = true;
 
 				bool didStartSwingingRayHit;
 				RaycastHit startSwingingRaycastHit = raycast(headsetGameObject.transform.position, Vector3.down, raycastMaxLength, raycastGroundLayerMask, out didStartSwingingRayHit);
+				
 				if (didStartSwingingRayHit) {
 					ohawasInstantHeightChangeCheck(startSwingingRaycastHit.point.y, lastRaycastHitWhileArmSwinging.point.y);
 					// If we need to rewind, don't arm swing this frame
@@ -545,12 +514,9 @@ public class ArmSwinger : MonoBehaviour {
 			
 			latestArtificialMovement = movementAmount;
 			latestArtificialRotation = movementRotation;
-
-                // Move forward in the X and Z axis only (no flying!)
-                if (HeadMovement)
-                    return new Vector3 (movementAmount,0,0);
-                else
-                    return getForwardXZ(movementAmount, movementRotation);
+            // jordi movement
+			// Move forward in the X and Z axis only (no flying!)
+			return getForwardXYZ(movementAmount, movementRotation); 
 
 		}
 		else {
@@ -648,33 +614,9 @@ public class ArmSwinger : MonoBehaviour {
 
 	// Arm Swing when armSwingMode is OneButtonSameController
 	bool swingOneButtonSameController(ref float movement, ref Quaternion rotation) {
-
-        /*if (leftButtonPressed || rightButtonPressed)
-        {
-            Vector3 PreviousAngle = rightControllerPreviousTransform.eulerAngles;
-            rightControllerPreviousTransform.LookAt(rightControllerGameObject.transform);
-
-            Vector3 CheckingAngle = rightControllerPreviousTransform.eulerAngles - PreviousAngle;
-            print(CheckingAngle); 
-
-            rightControllerPreviousTransform.position = rightControllerGameObject.transform.position;
-            rightControllerPreviousTransform.eulerAngles = rightControllerGameObject.transform.eulerAngles;
-
-            if ((CheckingAngle.y < 150 ||  CheckingAngle.y > 220)) {
-                leftButtonPressed = false;
-                rightButtonPressed = false;
-            }
-        }*/
-
-        if (LeftObject)
-            leftButtonPressed = false;
-        if (RightObject)
-            rightButtonPressed = false;
-
-        if (leftButtonPressed && rightButtonPressed) {
-
-            // The rotation is the average of the two controllers
-            rotation = determineAverageControllerRotation();
+		if (leftButtonPressed && rightButtonPressed) {
+			// The rotation is the average of the two controllers
+			rotation = determineAverageControllerRotation();
 
 			// Find the change in controller position since last Update()
 			float leftControllerChange = Vector3.Distance(leftControllerPreviousLocalPosition, leftControllerLocalPosition);
@@ -686,8 +628,6 @@ public class ArmSwinger : MonoBehaviour {
 
 			// Both controllers are in use, so controller movement is the average of the two controllers' change times the both controller coefficient
 			float controllerMovement = (leftMovement + rightMovement) / 2 * armSwingBothControllersCoefficient;
-            
-
 
 			// If movingInertia is enabled, the higher of inertia or controller movement is used
 			if (movingInertia) {
@@ -719,16 +659,18 @@ public class ArmSwinger : MonoBehaviour {
 			else {
 				movement = controllerMovement;
 			}
-            return true;
+
+			return true;
 		}
 		else if (rightButtonPressed) {
 			// The rotation is the rotation of the right controller
 			rotation = rightControllerGameObject.transform.rotation;
+
 			// Find the change in controller position since last Update()
 			float rightControllerChange = Vector3.Distance(rightControllerPreviousLocalPosition, rightControllerLocalPosition);
 
-            // Calculate what camera rig movement the change should be converted to
-            float rightMovement = calculateMovement(armSwingControllerToMovementCurve, rightControllerChange, armSwingControllerSpeedForMaxSpeed, armSwingMaxSpeed);
+			// Calculate what camera rig movement the change should be converted to
+			float rightMovement = calculateMovement(armSwingControllerToMovementCurve, rightControllerChange, armSwingControllerSpeedForMaxSpeed, armSwingMaxSpeed);
 
 			// controller movement is the change of the right controller times the single controller coefficient
 			float controllerMovement = rightMovement * armSwingSingleControllerCoefficient;
@@ -741,7 +683,7 @@ public class ArmSwinger : MonoBehaviour {
 				movement = controllerMovement;
 			}
 
-            return true;
+			return true;
 		}
 		// If stopping inertia is enabled
 		else if (stoppingInertia && latestArtificialMovement != 0) {
@@ -756,7 +698,7 @@ public class ArmSwinger : MonoBehaviour {
 		else {
 			return false;
 		}
-    }
+	}
 
 	// Arm Swing when armSwingMode is OneButtonSameControllerExclusive
 	bool swingOneButtonSameControllerExclusive(ref float movement, ref Quaternion rotation) {
@@ -991,8 +933,8 @@ public class ArmSwinger : MonoBehaviour {
 				// Save the current non-out-of-bounds headset and play area position
 				saveRewindPosition();
 			}
-
-			if (!outOfBounds && !wallClipThisFrame && currentPreventionReason == PreventionReason.NONE && !playAreaHeightAdjustmentPaused) {
+            //raycast ground JORDI
+			/*if (!outOfBounds && !wallClipThisFrame && currentPreventionReason == PreventionReason.NONE && !playAreaHeightAdjustmentPaused) {
 				if ((raycastOnlyHeightAdjustWhileArmSwinging && armSwinging) || (!raycastOnlyHeightAdjustWhileArmSwinging)) {
 					if (headsetCenterRaycastHitHistoryHeight.Count > 0) {
 						// Move the camera to adjust to the ground
@@ -1002,7 +944,7 @@ public class ArmSwinger : MonoBehaviour {
 							cameraRigGameObject.transform.position.z);
 					}
 				}
-			}
+			}*/
 		} else {
 			//triggerRewind(PreventionReason.NO_GROUND);
 		}
@@ -1595,8 +1537,15 @@ public class ArmSwinger : MonoBehaviour {
 		return vector3XZOnly(forwardMovement);
 	}
 
-	// Returns the average Y value of a RaycastHit list
-	public static float averageRaycastHitY(List<RaycastHit> list) {
+    // Returns a forward vector given the distance and direction
+    public static Vector3 getForwardXYZ(float forwardDistance, Quaternion direction)
+    {
+        Vector3 forwardMovement = direction * Vector3.forward * forwardDistance;
+        return forwardMovement;
+    }
+
+    // Returns the average Y value of a RaycastHit list
+    public static float averageRaycastHitY(List<RaycastHit> list) {
 
 		float avgY = 0;
 
