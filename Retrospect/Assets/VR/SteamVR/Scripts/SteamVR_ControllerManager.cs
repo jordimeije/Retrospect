@@ -57,7 +57,13 @@ public class SteamVR_ControllerManager : MonoBehaviour
 	void Awake()
 	{
 		UpdateTargets();
+        Invoke("JordiTest", 2f);
 	}
+
+    void JordiTest()
+    {
+        objects = null;
+    }
 
 	SteamVR_ControllerManager()
 	{
@@ -86,7 +92,7 @@ public class SteamVR_ControllerManager : MonoBehaviour
 		inputFocusAction.enabled = true;
 		deviceConnectedAction.enabled = true;
 		trackedDeviceRoleChangedAction.enabled = true;
-	}
+    }
 
 	void OnDisable()
 	{
