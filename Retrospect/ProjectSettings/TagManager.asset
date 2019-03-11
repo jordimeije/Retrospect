@@ -15,6 +15,9 @@ TagManager:
   - PhysicsPassthroughDuplicate
   - SKSEditorTemp
   - PhysDupe
+  - TeleportIgnore
+  - Ground
+  - Grabbable
   layers:
   - Default
   - TransparentFX
@@ -30,10 +33,10 @@ TagManager:
   - CustomRenderer
   - CustomRendererOnly
   - CustomRendererPlaceholder
-  - 
-  - 
-  - 
-  - 
+  - Tree
+  - PostProcessing
+  - Invisible
+  - Crystals
   - 
   - 
   - 
