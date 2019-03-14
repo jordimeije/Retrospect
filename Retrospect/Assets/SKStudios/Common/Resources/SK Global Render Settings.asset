@@ -16,18 +16,18 @@ MonoBehaviour:
   _physicsPassthroughCached: 0
   _importedCached: 0
   _recursionNumberCached: 1
-  _placeholderResolutionCached: 128
-  _previewResolutionCached: 128
+  _placeholderResolutionCached: 1024
+  _previewResolutionCached: 1024
   _invertedCached: 0
   _uvFlipCached: 0
-  _clippingCached: 0
+  _clippingCached: 1
   _physStyleBCached: 1
   _minimizedCached: 1
   _closedCached: 1
   _mirrorVisualizationCached: 1
   _mirrorGizmosCached: 1
   _mirrorPreviewCached: 0
-  _nonscaledMirrorsCached: 0
+  _nonscaledMirrorsCached: 1
   _adaptiveQualityCached: 1
   _aggressiveRecursionOptimizationCached: 1
   _customSkyboxCached: 0

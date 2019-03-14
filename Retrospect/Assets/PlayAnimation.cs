@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayAnimation : MonoBehaviour {
-
-    public bool PlayForward;
-    public bool PlayBackward;
-    public bool Pause;
+public class PlayAnimation : MonoBehaviour
+{
+    public bool Click;
+    public bool Ishovering;
+    public bool GoForward;
+    public bool GoBackward;
     public List<GameObject> Ropes;
-    bool IsGoingForward;
-    bool Hovering;
-    bool click;
 
     private void Start()
     {
@@ -23,76 +21,66 @@ public class PlayAnimation : MonoBehaviour {
         }
     }
 
-
-
-    public void PlayHovering() {
-            PlayBackward = false;
-            PlayForward = true;
-            Hovering = true;
-    }
-    public void PlayBackwardsHovering()
+    public void HoverEvent(int i)
     {
-            PlayForward = false;
-            PlayBackward = true;
-            Hovering = true;
-    }
-    public void Play()
-    {
-        PlayForward = true;
-    }
-    public void PlayBackwards()
-    {
-        PlayBackward = true;
+        Ishovering = true;
+        if (i == 0)
+        {
+            GoForward = true;
+            GoBackward = false;
+        }
+        if (i == 1)
+        {
+            GoBackward = true;
+            GoForward = false;
+        }
     }
 
-    public void Click()
+    public void UnHoverEvent(int i)
     {
-        click = true;
-    }
-    public void Unclick()
-    {
-        click = false;
-        StopPlay();
+        Ishovering = false;
     }
 
-    public void StopPlay()
+    public void SetClick()
     {
-        PlayForward = false;
-        PlayBackward = false;
-        Pause = true;
-        Hovering = false;
+        Click = true;
+    }
+
+    public void ReleaseClick()
+    {
+        Click = false;
     }
 
     // Update is called once per frame
-    void Update () {
-        if (PlayForward && (Input.GetKeyDown(KeyCode.Mouse0) || click))
-        {
-            GetComponent<Animation>()["BucketClimb"].speed = 1;
-            GetComponent<Animation>().Play();
-            PlayForward = false;
-            IsGoingForward = true;
-        }
-        if (PlayBackward && (Input.GetKeyDown(KeyCode.Mouse0) || click))
-        {
-            if (!GetComponent<Animation>().IsPlaying("BucketClimb") && IsGoingForward)
-                GetComponent<Animation>()["BucketClimb"].normalizedTime = 1;
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+            SetClick();
 
-            GetComponent<Animation>()["BucketClimb"].speed = -1;
-            GetComponent<Animation>().Play();
-            PlayBackward = false;
-            IsGoingForward = false;
-        }
-        if (Pause || (Input.GetKeyUp(KeyCode.Mouse0) && !UnityEngine.XR.XRDevice.isPresent))
+        if (Click && Ishovering && GoForward)
         {
-            if (Hovering)
+            if (GetComponent<Animation>()["BucketClimb"].normalizedTime < 0.99f)
             {
-                if (IsGoingForward && !PlayBackward)
-                    PlayForward = true;
-                else if (!PlayForward)
-                    PlayBackward = true;
+                GetComponent<Animation>()["BucketClimb"].speed = 1;
+                GetComponent<Animation>().Play();
             }
+
+        }
+        if (Click && Ishovering && GoBackward)
+        {
+            if (GetComponent<Animation>()["BucketClimb"].normalizedTime > 0.01f)
+            {
+                GetComponent<Animation>()["BucketClimb"].speed = -1;
+                GetComponent<Animation>().Play();
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+            ReleaseClick();
+
+        if (GetComponent<Animation>()["BucketClimb"].speed != 0 && (!Ishovering || Click == false))
+        {
             GetComponent<Animation>()["BucketClimb"].speed = 0;
-            Pause = false;
         }
     }
 }

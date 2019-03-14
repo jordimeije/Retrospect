@@ -29,12 +29,11 @@ public class StickToGround : MonoBehaviour {
         {
             Timer += Time.deltaTime;
             _Timer = 0;
-            print(raycastHit.transform.gameObject);
             if (raycastHit.transform.gameObject != CurrentGround)
             {
                 CurrentGround = raycastHit.transform.gameObject;
                 transform.parent = CurrentGround.transform.root;
-                transform.eulerAngles = CurrentGround.transform.root.eulerAngles;
+                //transform.eulerAngles = CurrentGround.transform.root.eulerAngles;
             }
             transform.position = raycastHit.point;
             if (Timer > 1.4f)

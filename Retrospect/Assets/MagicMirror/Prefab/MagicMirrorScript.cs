@@ -438,6 +438,7 @@ namespace DigitalRuby.MagicMirror
             }
         }
 
+
         private void OnWillRenderObject()
         {
             QueueReflection(Camera.current);

@@ -578,8 +578,12 @@ namespace Valve.VR.InteractionSystem
 					transform.position = noSteamVRFallbackCamera.transform.forward * ( -1000.0f );
 
 					RaycastHit raycastHit;
-					if ( Physics.Raycast( ray, out raycastHit, noSteamVRFallbackMaxDistanceNoItem ) )
+                    int layerMask = 1 << 9;
+                    layerMask = ~layerMask;
+
+                    if ( Physics.Raycast( ray, out raycastHit, noSteamVRFallbackMaxDistanceNoItem,layerMask) )
 					{
+
 						transform.position = raycastHit.point;
 
 						// Remember this distance in case we click and drag the mouse

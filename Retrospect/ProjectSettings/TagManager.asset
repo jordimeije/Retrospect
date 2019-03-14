@@ -18,6 +18,8 @@ TagManager:
   - TeleportIgnore
   - Ground
   - Grabbable
+  - Belt
+  - Key
   layers:
   - Default
   - TransparentFX
