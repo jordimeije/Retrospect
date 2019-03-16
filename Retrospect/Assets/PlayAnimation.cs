@@ -64,6 +64,10 @@ public class PlayAnimation : MonoBehaviour
                 GetComponent<Animation>()["BucketClimb"].speed = 1;
                 GetComponent<Animation>().Play();
             }
+            else
+            {
+                GetComponent<Animation>()["BucketClimb"].speed = 0;
+            }
 
         }
         if (Click && Ishovering && GoBackward)
@@ -72,6 +76,10 @@ public class PlayAnimation : MonoBehaviour
             {
                 GetComponent<Animation>()["BucketClimb"].speed = -1;
                 GetComponent<Animation>().Play();
+            }
+            else
+            {
+                GetComponent<Animation>()["BucketClimb"].speed = 0;
             }
         }
 

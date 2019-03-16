@@ -1,0 +1,18 @@
+1: Finished Darkening code
+2: Fixed HDR
+3: Fixed pickup problem (couldn't pickup anything)
+4: Fixed Automatic unlock problem with key and keyhole.
+5: Fixed reflection shard that couldn't reflect anymore
+6: Fixed automatic sound loop that didn't work
+7: Fixed well animation reset
+8: turning of throwable objects are now faster
+9: Make ball pointer invisible when no collision is detected.
+10: Portalheights are not sync.
+11: dynamic darkening
+
+Link darkening to progress
+Add powershot to cubes
+add endboss eye
+add explosion effect
+
+info@hookhoes.nl

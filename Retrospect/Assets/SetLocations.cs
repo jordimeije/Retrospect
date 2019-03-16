@@ -28,10 +28,10 @@ public class SetLocations : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                Speed = 75;
+                Speed = 105;
             }
             else
-                Speed = 30;
+                Speed = 50;
 
             if (Input.GetKey(KeyCode.E))
             {

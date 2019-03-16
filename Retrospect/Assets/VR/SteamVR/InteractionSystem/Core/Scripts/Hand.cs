@@ -581,23 +581,26 @@ namespace Valve.VR.InteractionSystem
                     int layerMask = 1 << 9;
                     layerMask = ~layerMask;
 
-                    if ( Physics.Raycast( ray, out raycastHit, noSteamVRFallbackMaxDistanceNoItem,layerMask) )
+                    if ( Physics.Raycast( ray, out raycastHit, noSteamVRFallbackMaxDistanceNoItem, layerMask) )
 					{
-
-						transform.position = raycastHit.point;
+                            transform.position = raycastHit.point;
+                            GetComponentInChildren<MeshRenderer>().enabled = true;
 
 						// Remember this distance in case we click and drag the mouse
 						noSteamVRFallbackInteractorDistance = Mathf.Min( noSteamVRFallbackMaxDistanceNoItem, raycastHit.distance );
 					}
 					else if ( noSteamVRFallbackInteractorDistance > 0.0f )
 					{
-						// Move it around at the distance we last had a hit
-						transform.position = ray.origin + Mathf.Min( noSteamVRFallbackMaxDistanceNoItem, noSteamVRFallbackInteractorDistance ) * ray.direction;
-					}
+                        // Move it around at the distance we last had a hit
+                        //transform.position = ray.origin + Mathf.Min( noSteamVRFallbackMaxDistanceNoItem, noSteamVRFallbackInteractorDistance ) * ray.direction;
+                        GetComponentInChildren<MeshRenderer>().enabled = false;
+                    }
 					else
 					{
-						// Didn't hit, just leave it where it was
-						transform.position = oldPosition;
+                        // Didn't hit, just leave it where it was
+                        //transform.position = oldPosition;
+                        GetComponentInChildren<MeshRenderer>().enabled = false;
+
 					}
 				}
 			}

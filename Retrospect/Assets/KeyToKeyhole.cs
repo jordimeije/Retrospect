@@ -9,11 +9,13 @@ public class KeyToKeyhole : MonoBehaviour {
     public GameObject Portal2;
     GameObject Key;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Key")
+        if (other.tag == "Key" && !GetComponent<SetLocations>().HandAttached)
         {
             Key = other.gameObject;
+            Key.GetComponent<BoxCollider>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
             Portal1.SetActive(true);
             Portal2.SetActive(true);
             GetComponent<AudioSource>().clip = C;

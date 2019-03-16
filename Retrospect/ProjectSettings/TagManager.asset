@@ -20,6 +20,7 @@ TagManager:
   - Grabbable
   - Belt
   - Key
+  - Floater
   layers:
   - Default
   - TransparentFX

@@ -29,7 +29,7 @@ MonoBehaviour:
   _mirrorPreviewCached: 0
   _nonscaledMirrorsCached: 1
   _adaptiveQualityCached: 1
-  _aggressiveRecursionOptimizationCached: 1
+  _aggressiveRecursionOptimizationCached: 0
   _customSkyboxCached: 0
   _ignoredNotifications: 
   SinglePassStereoCached: 1

@@ -46,7 +46,7 @@ public class CircularGravity : MonoBehaviour
 
     public void OnPickup()
     {
-        Current += Random.Range(0, Targets.Count);//(Current + 1) % Targets.Count;
+        Current = Random.Range(0, Targets.Count);//(Current + 1) % Targets.Count;
         target = Targets[Current];
     }
 }
