@@ -61,6 +61,7 @@ public class CodeGenerater : MonoBehaviour {
             {
                 Screen.GetComponent<Text>().text = "Yay";
                 Portal.SetActive(true);
+                Ambiance.Level++;
                 SoundPlayer.GetComponent<AudioPlayer>().GateOpened();
             }
         }

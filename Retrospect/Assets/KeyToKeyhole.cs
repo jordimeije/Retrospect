@@ -18,6 +18,7 @@ public class KeyToKeyhole : MonoBehaviour {
             GetComponent<BoxCollider>().enabled = false;
             Portal1.SetActive(true);
             Portal2.SetActive(true);
+            Ambiance.Level++;
             GetComponent<AudioSource>().clip = C;
             GetComponent<AudioSource>().Play();
             Invoke("DestroyObjects", C.length);

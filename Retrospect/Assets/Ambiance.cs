@@ -98,7 +98,6 @@ public class Ambiance : MonoBehaviour
         float Speed = 2f;
         while (CurrentValue < 1)
         {
-            print(CurrentValue);
             LightToChange.intensity = Mathf.Lerp(OldValue, NewValue, CurrentValue);
             CurrentValue += Time.deltaTime * Speed;
             yield return new WaitForSecondsRealtime(0.1f);
