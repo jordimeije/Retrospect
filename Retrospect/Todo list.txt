@@ -1,6 +1,10 @@
 Link darkening to progress
-Add powershot to cubes
-add endboss eye
+//Add powershot to cubes
+//add endboss eye
 add explosion effect
+
+in spiegel portaal en licht layer uitzetten
+sneller laten lopen
+layer van oog aanpassen
 
 info@hookhoes.nl

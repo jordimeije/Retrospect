@@ -1,23 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class PowerShot : MonoBehaviour {
+namespace Valve.VR.InteractionSystem
+{
 
-	// Use this for initialization
-	void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.Space))
-            try
+    [RequireComponent(typeof(Interactable))]
+    public class PowerShot : MonoBehaviour
+    {
+        float WaitTime;
+        // Use this for initialization
+        void OnEnable() {
+            WaitTime = 0;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            WaitTime += Time.deltaTime;
+            if (WaitTime > 0.1f)
             {
-                transform.parent.GetComponent<Valve.VR.InteractionSystem.Hand>().DetachObject(this.gameObject);
-                GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 2000);
+                if (Input.GetKeyDown(KeyCode.Space))
+                    try
+                    {
+                        transform.parent.GetComponent<Hand>().DetachObject(this.gameObject);
+                        GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 2000);
+                    }
+                    catch { }
+                for (int i = 0; i < Player.instance.handCount; i++)
+                {
+                    Hand hand = Player.instance.GetHand(i);
+                    if (hand.controller != null)
+                    {
+                        if (hand.controller.GetPressDown(Valve.VR.EVRButtonId.k_EButton_A))
+                        {
+                            transform.parent.GetComponent<Hand>().DetachObject(this.gameObject);
+                            GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
+                        }
+                    }
+                }
             }
-            catch { }
-        print(Valve.VR.EVRButtonId.k_EButton_Grip);
+        }
     }
 }
