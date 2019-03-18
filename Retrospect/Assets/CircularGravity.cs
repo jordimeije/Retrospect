@@ -17,11 +17,11 @@ public class CircularGravity : MonoBehaviour
 
     private float distance;
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, radius);
-    }
+    }*/
 
     // Use this for initialization
     void Start()

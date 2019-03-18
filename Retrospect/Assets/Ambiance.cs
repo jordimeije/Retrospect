@@ -16,7 +16,7 @@ public class Ambiance : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Cubes = GameObject.FindGameObjectsWithTag("Floater");
+        //Cubes = GameObject.FindGameObjectsWithTag("Floater");
         foreach (GameObject C in Cubes)
             C.SetActive(false);
 
@@ -54,6 +54,7 @@ public class Ambiance : MonoBehaviour
                     {
                         StartCoroutine(ChangeColor(L.GetColor("_EmissionColor"), L.GetColor("_EmissionColor") / 1.2f, L));
                     }
+                    StartCoroutine(ChangeSkybox(0.5f, 0.4f));
                     break;
                 case 2:
                     for (int i = (int)Mathf.Floor(Cubes.Length / 4) * 2; i < Mathf.Floor(Cubes.Length / 4) * 3; i++)
@@ -62,12 +63,13 @@ public class Ambiance : MonoBehaviour
                     }
                     foreach (Light L in Lights)
                     {
-                        StartCoroutine(ChangeLighting(L.intensity, L.intensity / 1.2f, L));
+                        StartCoroutine(ChangeLighting(L.intensity, L.intensity / 1.4f, L));
                     }
                     foreach (Material L in GlowObjects)
                     {
                         StartCoroutine(ChangeColor(L.GetColor("_EmissionColor"), L.GetColor("_EmissionColor") / 1.4f, L));
                     }
+                    StartCoroutine(ChangeSkybox(0.4f, 0.3f));
                     break;
                 case 3:
                     for (int i = (int)Mathf.Floor(Cubes.Length / 4) * 3; i < Cubes.Length; i++)
@@ -82,6 +84,7 @@ public class Ambiance : MonoBehaviour
                     {
                         StartCoroutine(ChangeColor(L.GetColor("_EmissionColor"), L.GetColor("_EmissionColor") / 10f, L));
                     }
+                    StartCoroutine(ChangeSkybox(0.3f, 0.2f));
                     break;
             }
             _Level = Level;
@@ -116,6 +119,18 @@ public class Ambiance : MonoBehaviour
             c.g = Mathf.Lerp(OldValue.g, NewValue.g, CurrentValue);
             c.r = Mathf.Lerp(OldValue.r, NewValue.r, CurrentValue);
             L.SetColor("_EmissionColor", c);
+            CurrentValue += Time.deltaTime * Speed;
+            yield return new WaitForSecondsRealtime(0.1f);
+        }
+    }
+
+    IEnumerator ChangeSkybox(float OldValue, float NewValue)
+    {
+        float CurrentValue = 0;
+        float Speed = 2f;
+        while (CurrentValue < 1)
+        {
+            RenderSettings.skybox.SetFloat("_Exposure", Mathf.Lerp(OldValue, NewValue, CurrentValue));
             CurrentValue += Time.deltaTime * Speed;
             yield return new WaitForSecondsRealtime(0.1f);
         }

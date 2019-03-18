@@ -5,7 +5,7 @@ using UnityEngine;
 public class AudioPlayer : MonoBehaviour {
 
     public List<AudioClip> AudioFiles;
-    public int Songs;
+    public int Songs = 0;
     public int RewindSongs;
     public float OriginalVolume;
 
@@ -20,6 +20,7 @@ public class AudioPlayer : MonoBehaviour {
 	void Update () {
         if (!GetComponent<AudioSource>().isPlaying)
         {
+            GetComponent<AudioSource>().Stop();
             Invoke("PlayNew", 5f);
         }
 

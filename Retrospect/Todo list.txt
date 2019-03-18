@@ -1,10 +1,8 @@
-Link darkening to progress
-//Add powershot to cubes
-//add endboss eye
 add explosion effect
+Voltooid liedje afspelen na put
+Volgende liedjes afspelen in eindlevel
+meer geluiden bij acties
+quotes importeren in het spel.
 
-in spiegel portaal en licht layer uitzetten
-sneller laten lopen
-layer van oog aanpassen
 
 info@hookhoes.nl
