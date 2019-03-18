@@ -14,6 +14,9 @@ public class CodeGenerater : MonoBehaviour {
     public string Numbers;
     public string SavedNumbers;
 
+    public AudioClip Click;
+    public AudioClip Unlock;
+
     public GameObject Screen;
 
     public GameObject Portal;
@@ -42,6 +45,8 @@ public class CodeGenerater : MonoBehaviour {
         Screen.GetComponent<Text>().text = "";
         SavedNumbers += Num.ToString();
         SpritesHolders[CurrentNumber - 1].sprite = Sprites[Num];
+        GetComponent<AudioSource>().clip = Click;
+        GetComponent<AudioSource>().Play();
 
         if (CurrentNumber == AllNumbers.Count)
         {
@@ -60,9 +65,11 @@ public class CodeGenerater : MonoBehaviour {
             else
             {
                 Screen.GetComponent<Text>().text = "Yay";
+                GetComponent<AudioSource>().clip = Unlock;
+                GetComponent<AudioSource>().Play();
                 Portal.SetActive(true);
                 Ambiance.Level++;
-                SoundPlayer.GetComponent<AudioPlayer>().GateOpened();
+                SoundPlayer.GetComponent<AudioPlayer>().GateOpened(6);
             }
         }
     }

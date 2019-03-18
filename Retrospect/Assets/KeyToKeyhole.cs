@@ -8,6 +8,7 @@ public class KeyToKeyhole : MonoBehaviour {
     public GameObject Portal1;
     public GameObject Portal2;
     GameObject Key;
+    public GameObject MusicPlayer;
 
     private void OnTriggerStay(Collider other)
     {
@@ -21,6 +22,7 @@ public class KeyToKeyhole : MonoBehaviour {
             Ambiance.Level++;
             GetComponent<AudioSource>().clip = C;
             GetComponent<AudioSource>().Play();
+            MusicPlayer.GetComponent<AudioPlayer>().GateOpened(4);
             Invoke("DestroyObjects", C.length);
         }
     }

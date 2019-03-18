@@ -31,13 +31,20 @@ public class Ambiance : MonoBehaviour
         }
     }
 
+    public void PickupShard()
+    {
+        if (Level < 3)
+        {
+            Level++;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
 
         if (_Level != Level)
         {
-            print(Level);
             switch (Level)
             {
                 case 1:
@@ -90,10 +97,10 @@ public class Ambiance : MonoBehaviour
             _Level = Level;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             Level++;
-        }
+        }*/
     }
 
     IEnumerator ChangeLighting(float OldValue, float NewValue, Light LightToChange)

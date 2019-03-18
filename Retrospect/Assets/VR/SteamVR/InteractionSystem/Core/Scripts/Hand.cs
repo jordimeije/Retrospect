@@ -268,7 +268,9 @@ namespace Valve.VR.InteractionSystem
 			HandDebugLog( "AttachObject " + objectToAttach );
 			objectToAttach.SendMessage( "OnAttachedToHand", this, SendMessageOptions.DontRequireReceiver );
 
-			UpdateHovering();
+            GetComponent<AudioSource>().Play();
+
+            UpdateHovering();
 		}
 
 

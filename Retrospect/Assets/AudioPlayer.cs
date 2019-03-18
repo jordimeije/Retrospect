@@ -8,6 +8,7 @@ public class AudioPlayer : MonoBehaviour {
     public int Songs = 0;
     public int RewindSongs;
     public float OriginalVolume;
+    bool once = false;
 
 	// Use this for initialization
 	void Start () {
@@ -33,20 +34,29 @@ public class AudioPlayer : MonoBehaviour {
         GetComponent<AudioSource>().Play();
     }
 
-    public void GateOpened()
+    public void GateOpened(int i)
     {
-        StartCoroutine("ChangeNumber");
+        StartCoroutine(ChangeNumber(i));
     }
 
-    public IEnumerator ChangeNumber()
+    public void PickedUpGlass(int i)
+    {
+        if (once == false)
+        {
+            StartCoroutine(ChangeNumber(i));
+            once = true;
+        }
+    }
+
+    public IEnumerator ChangeNumber(int i)
     {
         while (GetComponent<AudioSource>().volume > 0.01)
         {
-            GetComponent<AudioSource>().volume -= Time.deltaTime;
+            GetComponent<AudioSource>().volume -= Time.deltaTime / 5;
             yield return new WaitForSecondsRealtime(Time.deltaTime);
         }
 
-        GetComponent<AudioSource>().clip = AudioFiles[6];
+        GetComponent<AudioSource>().clip = AudioFiles[i];
         GetComponent<AudioSource>().Play();
 
         while (GetComponent<AudioSource>().volume < OriginalVolume)

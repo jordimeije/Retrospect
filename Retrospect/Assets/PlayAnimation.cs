@@ -9,6 +9,8 @@ public class PlayAnimation : MonoBehaviour
     public bool GoForward;
     public bool GoBackward;
     public List<GameObject> Ropes;
+    public List<AudioSource> CollisionSounds;
+
 
     private void Start()
     {
@@ -62,11 +64,16 @@ public class PlayAnimation : MonoBehaviour
             if (GetComponent<Animation>()["BucketClimb"].normalizedTime < 0.99f)
             {
                 GetComponent<Animation>()["BucketClimb"].speed = 1;
+                if (!CollisionSounds[0].isPlaying)
+                CollisionSounds[0].Play();
+
                 GetComponent<Animation>().Play();
             }
             else
             {
                 GetComponent<Animation>()["BucketClimb"].speed = 0;
+                CollisionSounds[0].Pause();
+                CollisionSounds[1].Pause();
             }
 
         }
@@ -75,11 +82,15 @@ public class PlayAnimation : MonoBehaviour
             if (GetComponent<Animation>()["BucketClimb"].normalizedTime > 0.01f)
             {
                 GetComponent<Animation>()["BucketClimb"].speed = -1;
+                if (!CollisionSounds[1].isPlaying)
+                    CollisionSounds[1].Play();
                 GetComponent<Animation>().Play();
             }
             else
             {
                 GetComponent<Animation>()["BucketClimb"].speed = 0;
+                CollisionSounds[0].Pause();
+                CollisionSounds[1].Pause();
             }
         }
 
@@ -89,6 +100,8 @@ public class PlayAnimation : MonoBehaviour
         if (GetComponent<Animation>()["BucketClimb"].speed != 0 && (!Ishovering || Click == false))
         {
             GetComponent<Animation>()["BucketClimb"].speed = 0;
+            CollisionSounds[0].Pause();
+            CollisionSounds[1].Pause();
         }
     }
 }

@@ -8,9 +8,12 @@ public class StickToGround : MonoBehaviour {
     public GameObject CurrentGround;
     public Vector3 _Position, __Position;
     public float Timer, _Timer;
+    AudioPlayer AudioPlayer;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
+        AudioPlayer = FindObjectOfType<AudioPlayer>();
     }
 
     // Update is called once per frame
@@ -31,6 +34,11 @@ public class StickToGround : MonoBehaviour {
             _Timer = 0;
             if (raycastHit.transform.gameObject != CurrentGround)
             {
+                if (raycastHit.transform.gameObject.name == "Island1" && Ambiance.Level == 3)
+                {
+                    AudioPlayer.GateOpened(7);
+                    Ambiance.Level++;
+                }
                 CurrentGround = raycastHit.transform.gameObject;
                 transform.parent = CurrentGround.transform.root;
                 //transform.eulerAngles = CurrentGround.transform.root.eulerAngles;

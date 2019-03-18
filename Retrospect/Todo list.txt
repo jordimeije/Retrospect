@@ -1,8 +1,5 @@
-add explosion effect
-Voltooid liedje afspelen na put
-Volgende liedjes afspelen in eindlevel
-meer geluiden bij acties
 quotes importeren in het spel.
+Eindportaal maken
 
 
 info@hookhoes.nl

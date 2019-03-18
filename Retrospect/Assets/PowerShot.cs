@@ -10,6 +10,8 @@ namespace Valve.VR.InteractionSystem
     public class PowerShot : MonoBehaviour
     {
         float WaitTime;
+        public bool Touchable;
+
         // Use this for initialization
         void OnEnable() {
             WaitTime = 0;
@@ -24,8 +26,13 @@ namespace Valve.VR.InteractionSystem
                 if (Input.GetKeyDown(KeyCode.Space))
                     try
                     {
+                        GetComponent<BoxCollider>().enabled = false;
+                        Invoke("EnableBoxCollider", 0.1f);
                         transform.parent.GetComponent<Hand>().DetachObject(this.gameObject);
                         GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 2000);
+                        Touchable = true;
+                        GetComponent<AudioSource>().Play();
+                        Invoke("Disabletouchable", 3f);
                     }
                     catch { }
                 for (int i = 0; i < Player.instance.handCount; i++)
@@ -35,12 +42,28 @@ namespace Valve.VR.InteractionSystem
                     {
                         if (hand.controller.GetPressDown(Valve.VR.EVRButtonId.k_EButton_A))
                         {
+                            GetComponent<BoxCollider>().enabled = false;
+                            Invoke("EnableBoxCollider", 0.1f);
                             transform.parent.GetComponent<Hand>().DetachObject(this.gameObject);
                             GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
+                            Touchable = true;
+                            GetComponent<AudioSource>().Play();
+                            Invoke("Disabletouchable", 3f);
                         }
                     }
                 }
             }
+        }
+
+        void EnableBoxCollider()
+        {
+            GetComponent<BoxCollider>().enabled = true;
+        }
+
+        void Disabletouchable()
+        {
+            Touchable = false;
+            this.enabled = false;
         }
     }
 }
