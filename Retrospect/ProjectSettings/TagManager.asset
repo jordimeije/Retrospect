@@ -21,6 +21,7 @@ TagManager:
   - Belt
   - Key
   - Floater
+  - Text
   layers:
   - Default
   - TransparentFX
