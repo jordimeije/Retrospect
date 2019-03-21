@@ -26,10 +26,10 @@ namespace Valve.VR.InteractionSystem
                 if (Input.GetKeyDown(KeyCode.Space))
                     try
                     {
-                        GetComponent<BoxCollider>().enabled = false;
+                        GetComponent<Collider>().enabled = false;
                         Invoke("EnableBoxCollider", 0.1f);
                         transform.parent.GetComponent<Hand>().DetachObject(this.gameObject);
-                        GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 2000);
+                        GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 3000);
                         Touchable = true;
                         GetComponent<AudioSource>().Play();
                         Invoke("Disabletouchable", 3f);
@@ -40,12 +40,12 @@ namespace Valve.VR.InteractionSystem
                     Hand hand = Player.instance.GetHand(i);
                     if (hand.controller != null)
                     {
-                        if (hand.controller.GetPressDown(Valve.VR.EVRButtonId.k_EButton_A))
+                        if (hand.controller.GetPressDown(Valve.VR.EVRButtonId.k_EButton_A) || hand.controller.GetPressDown(Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad))
                         {
-                            GetComponent<BoxCollider>().enabled = false;
+                            GetComponent<Collider>().enabled = false;
                             Invoke("EnableBoxCollider", 0.1f);
                             transform.parent.GetComponent<Hand>().DetachObject(this.gameObject);
-                            GetComponent<Rigidbody>().AddForce(transform.forward * 2000);
+                            GetComponent<Rigidbody>().AddForce(transform.forward * 3000);
                             Touchable = true;
                             GetComponent<AudioSource>().Play();
                             Invoke("Disabletouchable", 3f);
@@ -57,7 +57,7 @@ namespace Valve.VR.InteractionSystem
 
         void EnableBoxCollider()
         {
-            GetComponent<BoxCollider>().enabled = true;
+            GetComponent<Collider>().enabled = true;
         }
 
         void Disabletouchable()

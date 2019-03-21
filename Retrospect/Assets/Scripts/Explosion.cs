@@ -22,8 +22,14 @@ public class Explosion : MonoBehaviour {
             {
                 Portal.SetActive(true);
                 Sounds.GetComponent<AudioPlayer>().GateOpened(8);
+                Invoke("DestroyMe", 3f);
             }
         }
+    }
+
+    void DestroyMe()
+    {
+        Destroy(gameObject);
     }
 
     /*private void Update()

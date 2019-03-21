@@ -12,9 +12,10 @@ public class KeyToKeyhole : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Key" && !GetComponent<SetLocations>().HandAttached)
+        if (other.tag == "Key")
         {
             Key = other.gameObject;
+            print(Key.name);
             Key.GetComponent<BoxCollider>().enabled = false;
             GetComponent<BoxCollider>().enabled = false;
             Portal1.SetActive(true);
@@ -23,13 +24,26 @@ public class KeyToKeyhole : MonoBehaviour {
             GetComponent<AudioSource>().clip = C;
             GetComponent<AudioSource>().Play();
             MusicPlayer.GetComponent<AudioPlayer>().GateOpened(4);
+            try
+            {
+                transform.parent.GetComponent<Valve.VR.InteractionSystem.Hand>().DetachObject(this.gameObject);
+            }
+            catch { }
+            try
+            {
+                transform.parent.GetComponent<Valve.VR.InteractionSystem.Hand>().DetachObject(Key.gameObject);
+            }
+            catch { }
+ 
             Invoke("DestroyObjects", C.length);
         }
     }
 
     void DestroyObjects()
     {
-        Destroy(Key.gameObject);
-        Destroy(this.gameObject);
+        Key.GetComponent<MeshRenderer>().enabled = false;
+       // Destroy(Key);
+        Destroy(gameObject);
+
     }
 }
