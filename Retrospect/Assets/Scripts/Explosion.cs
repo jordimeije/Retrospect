@@ -15,6 +15,7 @@ public class Explosion : MonoBehaviour {
         if (col.transform.tag == "Floater" && col.transform.GetComponent<Valve.VR.InteractionSystem.PowerShot>().Touchable)
         {
             Particle.GetComponent<ParticleSystem>().Play();
+            col.transform.GetComponent<Valve.VR.InteractionSystem.PowerShot>().Touchable = false;
             Destroy(col.gameObject);
             GetComponent<AudioSource>().Play();
             TotalHits++;

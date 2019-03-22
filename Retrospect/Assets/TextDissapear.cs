@@ -19,12 +19,16 @@ public class TextDissapear : MonoBehaviour {
         if (Vector3.Distance(Player.transform.position, transform.position) < MaxDistance && once == false)
         {
             StartCoroutine(Dissapear());
+            try
+            {
+                GetComponent<AudioSource>().Play();
+            }
+            catch { }
             once = true;
         }
     }
 
     public IEnumerator Dissapear() {
-        print("Working");
         yield return new WaitForSecondsRealtime(DissapearanceTime);
         float Progress = 0;
         while (GetComponent<Renderer>().material.GetFloat("_Fragmentation") < 1)
