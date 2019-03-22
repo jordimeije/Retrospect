@@ -9,6 +9,7 @@ public class StickToGround : MonoBehaviour {
     public Vector3 _Position, __Position;
     public float Timer, _Timer;
     AudioPlayer AudioPlayer;
+    bool once;
 
     // Use this for initialization
     void Start()
@@ -34,10 +35,10 @@ public class StickToGround : MonoBehaviour {
             _Timer = 0;
             if (raycastHit.transform.gameObject != CurrentGround)
             {
-                if (raycastHit.transform.gameObject.name == "Island1" && Ambiance.Level == 3)
+                if (raycastHit.transform.gameObject.name == "Island1" && Ambiance.Level == 3 && !once)
                 {
                     AudioPlayer.GateOpened(7);
-                    Ambiance.Level++;
+                    once = true;
                 }
                 CurrentGround = raycastHit.transform.gameObject;
                 transform.parent = CurrentGround.transform.root;

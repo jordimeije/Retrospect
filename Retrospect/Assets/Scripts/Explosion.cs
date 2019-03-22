@@ -21,11 +21,17 @@ public class Explosion : MonoBehaviour {
             TotalHits++;
             if (TotalHits >= 3)
             {
-                Portal.SetActive(true);
-                Sounds.GetComponent<AudioPlayer>().GateOpened(8);
-                Invoke("DestroyMe", 3f);
+                Explode();
             }
         }
+    }
+
+    public void Explode()
+    {
+        Portal.SetActive(true);
+        Sounds.GetComponent<AudioPlayer>().GateOpened(8);
+        Ambiance.Level++;
+        Invoke("DestroyMe", 3f);
     }
 
     void DestroyMe()

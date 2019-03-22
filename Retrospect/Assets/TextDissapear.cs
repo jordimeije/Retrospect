@@ -8,6 +8,7 @@ public class TextDissapear : MonoBehaviour {
     public GameObject Player;
     public float MaxDistance;
     bool once = false;
+    public bool NextLevel;
 
     private void Start()
     {
@@ -24,6 +25,9 @@ public class TextDissapear : MonoBehaviour {
                 GetComponent<AudioSource>().Play();
             }
             catch { }
+            if (NextLevel)
+                Ambiance.Level++;
+
             once = true;
         }
     }

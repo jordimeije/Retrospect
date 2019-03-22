@@ -7,36 +7,39 @@ public class KeyToKeyhole : MonoBehaviour {
     public AudioClip C;
     public GameObject Portal1;
     public GameObject Portal2;
-    GameObject Key;
+    public GameObject Key;
     public GameObject MusicPlayer;
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Key")
         {
-            Key = other.gameObject;
-            print(Key.name);
-            Key.GetComponent<BoxCollider>().enabled = false;
-            GetComponent<BoxCollider>().enabled = false;
-            Portal1.SetActive(true);
-            Portal2.SetActive(true);
-            Ambiance.Level++;
-            GetComponent<AudioSource>().clip = C;
-            GetComponent<AudioSource>().Play();
-            MusicPlayer.GetComponent<AudioPlayer>().GateOpened(4);
-            try
-            {
-                transform.parent.GetComponent<Valve.VR.InteractionSystem.Hand>().DetachObject(this.gameObject);
-            }
-            catch { }
-            try
-            {
-                transform.parent.GetComponent<Valve.VR.InteractionSystem.Hand>().DetachObject(Key.gameObject);
-            }
-            catch { }
- 
-            Invoke("DestroyObjects", C.length);
+            NextLevel();
         }
+    }
+
+    public void NextLevel()
+    {
+        Key.GetComponent<BoxCollider>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
+        Portal1.SetActive(true);
+        Portal2.SetActive(true);
+        Ambiance.Level++;
+        GetComponent<AudioSource>().clip = C;
+        GetComponent<AudioSource>().Play();
+        MusicPlayer.GetComponent<AudioPlayer>().GateOpened(4);
+        try
+        {
+            transform.parent.GetComponent<Valve.VR.InteractionSystem.Hand>().DetachObject(this.gameObject);
+        }
+        catch { }
+        try
+        {
+            transform.parent.GetComponent<Valve.VR.InteractionSystem.Hand>().DetachObject(Key.gameObject);
+        }
+        catch { }
+
+        Invoke("DestroyObjects", C.length);
     }
 
     void DestroyObjects()

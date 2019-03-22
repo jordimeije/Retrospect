@@ -64,13 +64,18 @@ public class CodeGenerater : MonoBehaviour {
             }
             else
             {
-                Screen.GetComponent<Text>().text = "Yay";
-                GetComponent<AudioSource>().clip = Unlock;
-                GetComponent<AudioSource>().Play();
-                Portal.SetActive(true);
-                Ambiance.Level++;
-                SoundPlayer.GetComponent<AudioPlayer>().GateOpened(6);
+                NextLevel();
             }
         }
+    }
+
+    public void NextLevel()
+    {
+        Screen.GetComponent<Text>().text = "Yay";
+        GetComponent<AudioSource>().clip = Unlock;
+        GetComponent<AudioSource>().Play();
+        Portal.SetActive(true);
+        Ambiance.Level++;
+        SoundPlayer.GetComponent<AudioPlayer>().GateOpened(6);
     }
 }

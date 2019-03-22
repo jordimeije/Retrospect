@@ -31,14 +31,6 @@ public class Ambiance : MonoBehaviour
         }
     }
 
-    public void PickupShard()
-    {
-        if (Level < 3)
-        {
-            Level++;
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
