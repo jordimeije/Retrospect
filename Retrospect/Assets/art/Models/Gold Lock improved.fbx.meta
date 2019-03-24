@@ -23,7 +23,22 @@ ModelImporter:
     4300000: Box001
     4300002: Cylinder001
     4300004: Plane001
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 01 - Default
+    second: {fileID: 2100000, guid: 68c10f60d2f2ccc478ca896db2bacde5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 03 - Default
+    second: {fileID: 2100000, guid: 0304a4bb118886341920aa9608807294, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 07 - Default
+    second: {fileID: 2100000, guid: 40a4d3f81e9c8b84ca512252bf9b6170, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -17,7 +17,7 @@ public class TimeRecorder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Ambiance.Level < 5)
+        if (Ambiance.Level <= 4)
         CurrentTime = Mathf.Round((Time.realtimeSinceStartup - StartTime));
 
 

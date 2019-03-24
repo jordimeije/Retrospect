@@ -12,7 +12,7 @@ public class WellAppear : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Well.GetComponent<Animation>()["BucketClimb"].normalizedTime > 0.90f && !once)
+		if (Well.GetComponent<Animation>()["BucketClimb"].normalizedTime > 0.90f && !once && Ambiance.Level == 2)
         {
             SetCrystal();
             once = true;

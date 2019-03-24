@@ -62,6 +62,7 @@ public class SetLocations : MonoBehaviour {
     {
         transform.parent = Belt.transform;
         transform.position = Belt.transform.position;
+        transform.localEulerAngles = Vector3.zero;
         Inbelt = true;
     }
 }
