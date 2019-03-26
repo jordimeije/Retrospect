@@ -67,6 +67,7 @@ namespace SKStudios.Portals {
         //The root of the game object to be copied
         public Transform Root;
 
+
         //Material to replace all other non-particle system materials on this object with (optional)
         public Material ReplacementMaterial;
 
@@ -184,6 +185,7 @@ namespace SKStudios.Portals {
             get {
                 if (!_attachedCollider)
                     _attachedCollider = GetComponent<Collider>();
+
                 return _attachedCollider;
             }
         }

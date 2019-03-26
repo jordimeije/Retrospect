@@ -44,7 +44,12 @@ public class StickToGround : MonoBehaviour {
                 transform.parent = CurrentGround.transform.root;
                 //transform.eulerAngles = CurrentGround.transform.root.eulerAngles;
             }
-            transform.position = raycastHit.point;
+            Vector3 _P = transform.localPosition;
+            transform.position  = raycastHit.point;
+            _P.y = transform.localPosition.y;
+            transform.localPosition = _P;
+            //transform.position = raycastHit.point;
+
             if (Timer > 1.4f)
             {
                 __Position = _Position;
