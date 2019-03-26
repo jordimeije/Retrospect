@@ -24,7 +24,7 @@ public class Ambiance : MonoBehaviour
         {
             Cubes[i].SetActive(true);
         }
-        RenderSettings.skybox.SetFloat("_Exposure", 0.5f);
+        RenderSettings.skybox.SetFloat("_Exposure", 0.75f);
         for (int i = 0; i < GlowObjects.Count; i++)
         {
             GlowObjects[i].SetColor("_EmissionColor", OldValues[i].GetColor("_EmissionColor"));
@@ -53,7 +53,7 @@ public class Ambiance : MonoBehaviour
                     {
                         StartCoroutine(ChangeColor(L.GetColor("_EmissionColor"), L.GetColor("_EmissionColor") / 1.2f, L));
                     }
-                    StartCoroutine(ChangeSkybox(0.5f, 0.4f));
+                    StartCoroutine(ChangeSkybox(0.75f, 0.5f));
                     break;
                 case 2:
                     for (int i = (int)Mathf.Floor(Cubes.Length / 4) * 2; i < Mathf.Floor(Cubes.Length / 4) * 3; i++)
@@ -68,7 +68,7 @@ public class Ambiance : MonoBehaviour
                     {
                         StartCoroutine(ChangeColor(L.GetColor("_EmissionColor"), L.GetColor("_EmissionColor") / 1.4f, L));
                     }
-                    StartCoroutine(ChangeSkybox(0.4f, 0.3f));
+                    StartCoroutine(ChangeSkybox(0.5f, 0.4f));
                     break;
                 case 3:
                     for (int i = (int)Mathf.Floor(Cubes.Length / 4) * 3; i < Cubes.Length; i++)
@@ -83,7 +83,7 @@ public class Ambiance : MonoBehaviour
                     {
                         StartCoroutine(ChangeColor(L.GetColor("_EmissionColor"), L.GetColor("_EmissionColor") / 10f, L));
                     }
-                    StartCoroutine(ChangeSkybox(0.3f, 0.2f));
+                    StartCoroutine(ChangeSkybox(0.4f, 0.2f));
                     break;
             }
             _Level = Level;
