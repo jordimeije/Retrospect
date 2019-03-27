@@ -17,7 +17,7 @@ public class PortalTeleporter : MonoBehaviour {
 		{
 			Vector3 portalToPlayer = player.position - transform.position;
 			float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
-
+            print(dotProduct);
 			// If this is true: The player has moved across the portal
 			if (dotProduct < 0f)
 			{
@@ -38,7 +38,7 @@ public class PortalTeleporter : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other)
 	{
-		if (other.tag == "Player")
+		if (other.transform.parent.tag == "MainCamera")
 		{
 			playerIsOverlapping = true;
 		}
@@ -46,7 +46,7 @@ public class PortalTeleporter : MonoBehaviour {
 
 	void OnTriggerExit (Collider other)
 	{
-		if (other.tag == "Player")
+		if (other.transform.parent.tag == "MainCamera")
 		{
 			playerIsOverlapping = false;
 		}
