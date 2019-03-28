@@ -254,6 +254,39 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 0, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!21 &89630986
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &114529722
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,17 +1286,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 571940289}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &656114435 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4601765297944490, guid: 571cf6a30b265184286a357569cabee2,
-    type: 2}
-  m_PrefabInternal: {fileID: 1799008915}
---- !u!4 &987647858 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4956054702392894, guid: 571cf6a30b265184286a357569cabee2,
-    type: 2}
-  m_PrefabInternal: {fileID: 1799008915}
---- !u!43 &1019411024
+--- !u!43 &607570458
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1418,6 +1441,16 @@ Mesh:
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
   m_MeshOptimized: 0
+--- !u!4 &656114435 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4601765297944490, guid: 571cf6a30b265184286a357569cabee2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1799008915}
+--- !u!4 &987647858 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4956054702392894, guid: 571cf6a30b265184286a357569cabee2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1799008915}
 --- !u!1 &1094881927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,39 +1660,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1212444566}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!21 &1227286010
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1241201285
 GameObject:
   m_ObjectHideFlags: 0
@@ -2660,12 +2660,12 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1227286010}
+      objectReference: {fileID: 89630986}
     - target: {fileID: 33703382493497292, guid: 571cf6a30b265184286a357569cabee2,
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1019411024}
+      objectReference: {fileID: 607570458}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 571cf6a30b265184286a357569cabee2, type: 2}
   m_IsPrefabAsset: 0

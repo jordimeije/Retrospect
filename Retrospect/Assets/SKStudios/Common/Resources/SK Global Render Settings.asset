@@ -16,8 +16,8 @@ MonoBehaviour:
   _physicsPassthroughCached: 0
   _importedCached: 0
   _recursionNumberCached: 1
-  _placeholderResolutionCached: 1024
-  _previewResolutionCached: 1024
+  _placeholderResolutionCached: 2048
+  _previewResolutionCached: 2048
   _invertedCached: 0
   _uvFlipCached: 0
   _clippingCached: 1

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class CodeGenerater : MonoBehaviour {
 
-    public static int CurrentNumber;
-    public static bool Isgood = false;
+    public int CurrentNumber;
+    public bool Isgood = false;
 
     public static List<int> AllNumbers = new List<int>();
     public List<SpriteRenderer> SpritesHolders;
@@ -23,9 +23,11 @@ public class CodeGenerater : MonoBehaviour {
 
     public GameObject SoundPlayer;
 
+    public bool AlwaysGood;
+
     public void Start()
     {
-
+        AllNumbers.RemoveRange(0, AllNumbers.Count);
         for(int i = 0; i < Numbers.Length; i++)
         {
             AllNumbers.Add(int.Parse(Numbers.Substring(i, 1)));
@@ -56,17 +58,30 @@ public class CodeGenerater : MonoBehaviour {
                 if (Isgood == false)
                     break;
             }
-            if (!Isgood)
+            if (!Isgood & !AlwaysGood)
             {
                 Screen.GetComponent<Text>().text = "Nope";
                 CurrentNumber = 0;
                 SavedNumbers = "";
             }
-            else
+            else if (!AlwaysGood)
             {
                 NextLevel();
             }
+            if (AlwaysGood)
+            {
+                Tutorial();
+            }
         }
+    }
+
+    public void Tutorial()
+    {
+        Screen.GetComponent<Text>().text = "Yay";
+        GetComponent<AudioSource>().clip = Unlock;
+        GetComponent<AudioSource>().Play();
+        Portal.SetActive(true);
+        Isgood = true;
     }
 
     public void NextLevel()
